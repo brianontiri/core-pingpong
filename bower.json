@@ -1,0 +1,23 @@
+{
+  "name": "pingpong",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "brian ontiri"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/brianontiri/core-pingpong",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7",
+    "moment": "^2.18.1"
+  }
+}

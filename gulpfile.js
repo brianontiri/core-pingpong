@@ -1,7 +1,7 @@
 var jshint = require('gulp-jshint');
 var del = require('del');
 var utilities = require('gulp-util');
-var gulp =require('gulp');
+var gulp = require('gulp');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var concat = require('gulp-concat');
@@ -10,7 +10,9 @@ var buildProduction = utilities.env.production;
 
 
 gulp.task('jsBrowserify', function() {
-  return browserify({ entries: ['./js/pingpong-interface.js'] })
+  return browserify({
+      entries: ['./js/pingpong-interface.js']
+    })
     .bundle()
     .pipe(source('app.js'))
     .pipe(gulp.dest('./build/js'));
@@ -22,32 +24,28 @@ gulp.task('concatInterface', function() {
     .pipe(gulp.dest('./tmp'));
 });
 
-gulp.task('concatInterface', function() {
-  return gulp.src(['./js/pingpong-interface.js', './js/signup-interface.js'])
-    .pipe(concat('allConcat.js'))
-    .pipe(gulp.dest('./tmp'));
-});
-
 
 gulp.task('jsBrowserify', ['concatInterface'], function() {
-  return browserify({ entries: ['./tmp/allConcat.js'] })
+  return browserify({
+      entries: ['./tmp/allConcat.js']
+    })
     .bundle()
     .pipe(source('app.js'))
     .pipe(gulp.dest('./build/js'));
 });
 
-gulp.task("minifyScripts", ["jsBrowserify"], function(){
+gulp.task("minifyScripts", ["jsBrowserify"], function() {
   return gulp.src("./build/js/app.js")
     .pipe(uglify())
     .pipe(gulp.dest("./build/js"));
 });
 
-gulp.task("clean", function(){
+gulp.task("clean", function() {
   return del(['build', 'tmp']);
 });
 
 
-gulp.task("build", function(){
+gulp.task("build", function() {
   if (buildProduction) {
     gulp.start('minifyScripts');
   } else {
@@ -56,7 +54,7 @@ gulp.task("build", function(){
 });
 
 
-gulp.task('jshint', function(){
+gulp.task('jshint', function() {
   return gulp.src(['js/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
